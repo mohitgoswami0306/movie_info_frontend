@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import _ from "lodash";
 
 class TableBody extends Component {
-  renderCell = (movie, column) => {
-    if (column.content) return column.content(movie);
+  renderCell = (item, column) => {
+    if (column.content) return column.content(item);
 
-    return _.get(movie, column.path);
+    return _.get(item, column.path);
   };
 
-  createKey = (movie, column) => {
-    return movie._id + (column.path || column.key);
+  createKey = (item, column) => {
+    return item._id + (column.path || column.key);
   };
 
   render() {
@@ -17,11 +17,11 @@ class TableBody extends Component {
 
     return (
       <tbody>
-        {data.map(movie => (
-          <tr key={movie._id}>
+        {data.map(item => (
+          <tr key={item._id}>
             {columns.map(column => (
-              <td key={this.createKey(movie, column)}>
-                {this.renderCell(movie, column)}
+              <td key={this.createKey(item, column)}>
+                {this.renderCell(item, column)}
               </td>
             ))}
           </tr>
